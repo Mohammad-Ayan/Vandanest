@@ -26,6 +26,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({ extended: true })); // to parse form data
 app.use(methodOverride('_method')); 
 app.engine('ejs', ejsMate); 
+app.use(express.static(path.join(__dirname, 'public'))); 
 
 
 app.get('/', (req, res) => {  // defines what to do when a request comes

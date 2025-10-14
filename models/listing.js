@@ -9,12 +9,20 @@ const listingSchema = new Schema({
     description: String,
     price: Number,
     location: String,
-    images: {
-        type: [String],
-        default: ["https://unsplash.com/illustrations/a-blue-square-with-a-white-check-mark-on-it-PB3ZserDqcs"],
-        set: (images) => images === "" ? "https://unsplash.com/illustrations/a-blue-square-with-a-white-check-mark-on-it-PB3ZserDqcs" 
-        : images,
-    },  
+    image: {
+        type: [
+            {
+                filename: String,
+                url: String,
+            }
+        ],
+        default: [
+            {
+                filename: "listingimage",
+                url: "https://unsplash.com/illustrations/a-blue-square-with-a-white-check-mark-on-it-PB3ZserDqcs"
+            }
+        ],
+    }, 
     country: String,
     // availableDates: [Date],
 });

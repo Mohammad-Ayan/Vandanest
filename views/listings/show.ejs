@@ -1,15 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vandanest</title>
-</head>
+<% layout('layouts/boilerplate') %>
 <body>
     <h2>Listing Details</h2>
     <ul>
         <li>Title: <%= listing.title %></li>
         <li>Description: <%= listing.description %></li>
+        <li>Image: <br> <img src="<%= listing.image %>" alt="Listing Image" style="max-width:300px;"></li>
         <li>Price: &#8377; <%= listing.price.toLocaleString("en-IN") %> per night</li>
         <li>Location: <%= listing.location %></li>
         <li>Country : <%= listing.country %></li>
