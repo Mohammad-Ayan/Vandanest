@@ -1,5 +1,16 @@
 /* Airbnb Navbar Custom CSS */
 
+body {
+  font-family: "Plus Jakarta Sans", sans-serif !important;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.container{
+  flex: 1;
+}
+
 /* Search bar container */
 .search-bar {
   border: 1px solid #ddd;
@@ -151,3 +162,82 @@
   margin: 0 4px;
   color: #aaa;
 }
+
+/* Cards */
+.card{
+  border: none !important;
+  margin-bottom: 2rem;
+  transition: transform 0.2s, box-shadow 0.2s;
+  border-radius: 20px;
+}
+
+.card-img-top {
+  border-radius: 1rem !important;
+  width: 100% !important;
+  object-fit: cover !important;
+}
+
+.card-body {
+  padding: 0 !important;
+}
+
+.card-text p{
+  font-weight: 400;
+}
+
+/* .card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+} */
+
+.listing-link{
+  text-decoration: none;
+}
+
+ .card-img-overlay{
+  opacity: 0;
+ }
+
+ .card:hover .card-img-overlay{
+  opacity: 0.2;
+  background-color: rgb(187, 187, 187);
+ }
+
+ .add-btn{
+  background-color: #ff385c!important;
+  border: none !important;
+  color: white;
+  border-radius: 50px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-weight: 500 !important;
+ }
+
+ .edit-btn{
+  background-color: #ff385c!important;
+  border: none !important;
+  color: white;
+  border-radius: 50px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-weight: 500 !important;
+ }
+
+/* Show page */
+ .show-img{
+  border-radius: 1rem !important;
+  width: 100% !important;
+  height: 400px !important;
+  object-fit: cover !important;
+ }
+
+ .btns{
+  display: flex;
+  gap: 10px;
+ }
+
+ .show-card{
+  padding-left: 0;
+  padding-right: 0;
+  
+ }
