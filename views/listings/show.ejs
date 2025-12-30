@@ -8,7 +8,9 @@
                 </h2>
             </div>
             <div class="card col-6 offset-3 mb-3 show-card listing-card">
-                <img src="<%= listing.image.url %>>" class="card-img-top show-img" alt="lisitng_image">
+                <img src="<%= listing.image?.url || 'https://images.unsplash.com/photo-1625505826533-5c80aca7d157?auto=format&fit=crop&w=800&q=60' %>"
+                    class="card-img-top show-img" alt="listing_image" />
+
                 <div class="card-body">
                     <p class="card-text">
                         <b>
@@ -58,17 +60,18 @@
                 <p><b>Reviews</b></p>
                 <div class="row">
                     <% for(let review of listing.reviews){ %>
-                    <div class="card col-5 ms-3 mb-3 review-card">
-                            <div class="card-body">
-                                <h7 class="card-title">Jone Done</h7>
-                                <p class="card-text">
+                        <div class="card col-5 ms-3 mb-3 review-card">
+                            <div class="mt-2 card-body">
+                                <h7 class="ms-1 card-title">Jone Done</h7>
+                                <p class="mt-2 card-text">
                                     <b>Comment:</b>
                                     <%= review.comment %> <br>
                                         <b>Rating:</b>
                                         <%= review.rating %> stars
                                 </p>
                             </div>
-                            <form class="mb-3 mt-2" method="POST" action="/listings/<%= listing._id %>/reviews/<%= review._id %>?_method=DELETE"
+                            <form class="mb-3 mt-2" method="POST"
+                                action="/listings/<%= listing._id %>/reviews/<%= review._id %>?_method=DELETE"
                                 style="display:inline;">
                                 <button class="btn btn-sm btn-dark " type="submit"
                                     onclick="return confirm('Are you sure you want to delete this review?');">
