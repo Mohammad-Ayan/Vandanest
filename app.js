@@ -7,10 +7,14 @@ const ejsMate = require('ejs-mate');
 const ExpressError = require('./utils/ExpressError');
 const session = require('express-session');
 const flash = require('connect-flash');
+const passport = require('passport');
+const LocalStrategy = require('passport-local');
+const User = require('./models/user');
 
 
-const listings = require('./routes/listing');
-const reviews = require('./routes/review.js');
+const listingsRouter = require('./routes/listing');
+const reviewsRouter = require('./routes/review.js');
+const userRouter = require('./routes/user');
 
 const MONGODB_URL = "mongodb://127.0.0.1:27017/vandanest";
 
@@ -52,15 +56,33 @@ app.get('/', (req, res) => {  // defines what to do when a request comes
 app.use(session(sessionOptions));
 app.use(flash());
 
+app.use(passport.initialize());
+app.use(passport.session()); 
+passport.use(new LocalStrategy(User.authenticate())); 
+
+passport.serializeUser(User.serializeUser()); 
+passport.deserializeUser(User.deserializeUser()); 
+
 app.use((req, res, next) => {
     res.locals.success = req.flash('success');
     res.locals.error = req.flash('error');
     next();
 });
 
+// app.get('/demouser', async (req, res) => {
+//     let fakeUser = new User({
+//          username: 'fake-User',
+//           email: 'user1@gmail.com'
+//         });
 
-app.use('/listings', listings);
-app.use('/listings/:id/reviews', reviews);
+//     let registeredUser = await User.register(fakeUser, 'hello123'); 
+//     res.send(registeredUser);
+// });
+
+
+app.use('/listings', listingsRouter);
+app.use('/listings/:id/reviews', reviewsRouter);
+app.use('/', userRouter);
 
 app.use((req, res, next) => {
     next(new ExpressError(404, 'Page Not Found'));
