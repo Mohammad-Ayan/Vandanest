@@ -9,13 +9,12 @@ const listingSchema = new Schema({
   },
   description: String,
   image: {
-  type: {
-    filename: String,
-    url: String,
+     filename: {
+    type: String, 
   },
-  default: {
-    filename: "listingimage",
-    url: "https://images.unsplash.com/photo-1625505826533-5c80aca7d157?auto=format&fit=crop&w=800&q=60",
+  url: {
+    type: String,
+    required: true,
   },
 },
 
@@ -26,13 +25,17 @@ const listingSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "Review",
   }],
+  owner: {
+    type: Schema.Types.ObjectId,
+    ref: "User",
+  },
 });
 
 listingSchema.post('findOneAndDelete', async (listing) => {
-  if(listing){
-    await review.deleteMany({_id : {$in: listing.reviews}}) 
+  if (listing) {
+    await review.deleteMany({ _id: { $in: listing.reviews } })
   }
-  });
+});
 
 const Listing = mongoose.model('Listing', listingSchema);
 module.exports = Listing;
